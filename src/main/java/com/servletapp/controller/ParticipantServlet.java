@@ -1,5 +1,6 @@
 package com.servletapp.controller;
 
+import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -19,6 +20,12 @@ public class ParticipantServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+    
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+    	super.init(config);
+    	System.out.println("ParticipantServlet - init was executed!");
+    }
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -29,6 +36,7 @@ public class ParticipantServlet extends HttpServlet {
 		
 		System.out.println("First Name: " + firstName);
 		System.out.println("Last Name: " + lastName);
+		System.out.println("That is all, folks!");
 		
 		response.setContentType("text/html");
 		String addedParticipantTimeStamp = new Date().toString();
@@ -36,6 +44,12 @@ public class ParticipantServlet extends HttpServlet {
 		
 		PrintWriter out = response.getWriter();
 		out.print(htmlResponse);
+	}
+	
+	@Override
+	public void destroy() {
+		super.destroy();
+		System.out.println("ParticipantServlet - destroy executed!");
 	}
 
 }
