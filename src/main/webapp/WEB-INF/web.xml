@@ -16,4 +16,15 @@
     <url-pattern>/hello</url-pattern>
     <url-pattern>/welcome</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ParticipantServlet</display-name>
+    <servlet-name>ParticipantServlet</servlet-name>
+    <servlet-class>com.servletapp.controller.ParticipantServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ParticipantServlet</servlet-name>
+    <url-pattern>/ParticipantServlet</url-pattern>
+    <url-pattern>/participant</url-pattern>
+  </servlet-mapping>
 </web-app>
