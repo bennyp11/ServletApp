@@ -3,7 +3,7 @@ package com.servletapp.model;
 public class Participant {
 	private String firstName;
 	private String lastName;
-	
+	private long id;
 	
 	public Participant() {
 		super();
@@ -12,7 +12,8 @@ public class Participant {
 	public Participant(String firstName, String lastName) {
 		super();
 		this.firstName = firstName;
-		this.lastName = lastName;		
+		this.lastName = lastName;
+		this.id = id;
 	}
 	
 	public String getFirstName() {
@@ -31,9 +32,13 @@ public class Participant {
 		this.lastName = lastName;
 	}
 	
+	public long getParticipantId() {
+		return id;
+	}
+	
 	@Override
 	public String toString() {
-		return "Participant [firstName=" + firstName +", lastName=" + lastName + "]";
+		return "Participant [firstName=" + firstName +", lastName=" + lastName + ", id=" + id + "]";
 	}
 	
 }
