@@ -40,13 +40,14 @@ public class ParticipantServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
-
+        DB db = new DB();
+        
         Connection connection = null;
             try {
-				connection = DB.makeConnection();
+				db.init();
 				try {
 					Participant participant = new Participant(firstName, lastName);
-		            insertData(participant, connection);
+		            insertData(participant, db.getConnection());
 		            System.out.println("Participant inserted successfully!");
 				} catch (SQLException e) {
 					e.printStackTrace();
