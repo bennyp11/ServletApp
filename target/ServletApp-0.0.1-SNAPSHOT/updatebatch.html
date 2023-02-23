@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Update a Batch</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+  var table = '<table><thead><tr><th>Date</th><th>Time</th><th>Count</th></tr></thead><tbody></tbody></table>';
+  $('body').append(table);
+  $.get('/ServletApp/batch', function(data) {
+    var batches = data;
+    if (batches.length > 0) {
+      var tbody = $('table tbody');
+      for (var i = 0; i < batches.length; i++) {
+        var batch = batches[i];
+        console.log(batch.date);
+        var row = '<tr><td>' + batch.date + '</td><td>' + batch.time + '</td><td>' + batch.count + '</td></tr>';
+        tbody.append(row);
+      }
+    }
+  });
+});
+</script>
+</head>
+<body>
+<nav>
+	<a class="active" href="/ServletApp/index.html">Zappin' Zumba</a>
+	<a href="/ServletApp/addparticipant.html">Add Participant</a>
+	<a href="/ServletApp/deleteparticipants.jsp">Delete Participants</a>
+	<a href="/ServletApp/updateparticipants.html">Update Participants</a>
+	<a href="/ServletApp/addbatch.html">Add Batch</a>
+	<a href="/ServletApp/deletebatch.jsp">Delete Batch</a>
+	<a href="/ServletApp/updatebatch.html">Update Batch</a>
+	<a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+</nav>
+</body>
+</html>

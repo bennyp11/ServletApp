@@ -15,7 +15,6 @@ public class ParticipantDAO implements DAO<Participant>{
 	public List<Participant> getAll(){
 		db.init();
 		List<Participant> participantList = new ArrayList<Participant>();
-	
 		try {
 			String sql = "select * from java.participants";
 			ResultSet set = db.executeQuery(sql);
@@ -23,6 +22,7 @@ public class ParticipantDAO implements DAO<Participant>{
 				Participant participant = new Participant();
 				participant.setFirstName(set.getString("firstName"));
 				participant.setLastName(set.getString("lastName"));
+				participant.setEmail(set.getString("email"));
 				participantList.add(participant);
 			}
 		} catch (Exception e) {
@@ -35,15 +35,16 @@ public class ParticipantDAO implements DAO<Participant>{
 	}
 	
 	@Override
-	public Participant getOne(long id) {
+	public Participant getOne(String email) {
 		db.init();
 		Participant participant = new Participant();
 		try {
-			String sql = "select * from java.participants where id = " + id;
+			String sql = "select * from java.participants where email = " + email;
 			ResultSet set = db.executeQuery(sql);
 			if(set.next()) {
 				participant.setFirstName(set.getString("firstName"));
 				participant.setLastName(set.getString("lastName"));
+				participant.setEmail(set.getString("email"));
 			}
 		} catch (Exception e) {
 			System.out.println("Error when getting one participant: " + e);
@@ -56,7 +57,7 @@ public class ParticipantDAO implements DAO<Participant>{
 		db.init();
 		int rowsAffected = 0;
 		try {
-			String sql = "insert into java.participants(firstName, lastName) values('" + obj.getFirstName() + "', '" + obj.getLastName() + "')";
+			String sql = "insert into java.participants(firstName, lastName, email) values('" + obj.getFirstName() + "', '" + obj.getLastName() + "', '" + obj.getEmail() + "')";
 			rowsAffected = db.executeUpdate(sql);
 			String message = (rowsAffected > 0) ? "Update made to participants" : "Unable to make update";
 			System.out.println(message);
@@ -71,7 +72,7 @@ public class ParticipantDAO implements DAO<Participant>{
 		db.init();
 		int rowsAffected = 0;
 		try {
-			String sql = "update java.participants set firstName = '" + obj.getFirstName() + "', lastName = '" + obj.getLastName() + "' where id = " + obj.getParticipantId();
+			String sql = "update java.participants set firstName = '" + obj.getFirstName() + "', lastName = '" + obj.getLastName() + "', email = '" + obj.getEmail() + "' where email = '" + obj.getEmail() + "'";
 			rowsAffected = db.executeUpdate(sql);
 			String message = (rowsAffected > 0) ? "Participant updated successfully" : "Unable to update Participant";
 			System.out.println(message);
@@ -82,11 +83,11 @@ public class ParticipantDAO implements DAO<Participant>{
 	}
 	
 	@Override
-	public int delete(long id) {
+	public int delete(String email) {
 		db.init();
 		int rowsAffected = 0;
 		try {
-			String sql = "delete from java.participants where id = " + id;
+			String sql = "delete from java.participants where email = '" + email + "'";
 			rowsAffected = db.executeUpdate(sql);
 			String message = (rowsAffected > 0) ? "Participant id deleted" : "Participant cannot be deleted";
 			System.out.println(message);

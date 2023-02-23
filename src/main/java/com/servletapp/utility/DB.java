@@ -21,7 +21,7 @@ public class DB {
     public void init() {
         try {
         	Class.forName("com.mysql.cj.jdbc.Driver");
-        	connection = DriverManager.getConnection();
+        	connection = DriverManager.getConnection("xxx");
         	statement = connection.createStatement();
         } catch (Exception e) {
         	e.printStackTrace();
